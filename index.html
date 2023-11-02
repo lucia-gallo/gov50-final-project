@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","non-voters/nonvoters_codebook.pdf","non-voters/README.md","nonvoters_data.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,9 +1517,53 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="proposal">Proposal</h2>
+<h2 id="data-visualization-milestone-3">Data Visualization (Milestone 3)</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='va'>nonvoters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"nonvoters_data.csv"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>educ</span><span class='op'>:</span><span class='va'>voter_category</span><span class='op'>)</span></span>
+<span><span class='va'>data1</span> <span class='op'>&lt;-</span> <span class='va'>nonvoters</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>educ</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>voter_category</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>voter_category</span>,</span>
+<span>              values_from <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>data1</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">educ</th>
+<th style="text-align: right;">always</th>
+<th style="text-align: right;">rarely/never</th>
+<th style="text-align: right;">sporadic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">College</td>
+<td style="text-align: right;">834</td>
+<td style="text-align: right;">423</td>
+<td style="text-align: right;">1073</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High school or less</td>
+<td style="text-align: right;">411</td>
+<td style="text-align: right;">631</td>
+<td style="text-align: right;">754</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Some college</td>
+<td style="text-align: right;">566</td>
+<td style="text-align: right;">397</td>
+<td style="text-align: right;">747</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="proposal-milestone-2">Proposal (Milestone 2)</h2>
 <p>Is there a relationship among college-educated voters, race, and likelihood to vote? In this study, I plan on using data from FiveThirtyEight to explore the demographics behind people’s voting patterns. I plan to focus on college-educated voters and their likelihood of voting based on race. I also might examine other parts of their identities, including age and income. College-educated voters are typically already more likely to be voters compared to non-college-educated citizens, but it would be interesting to examine the other demographics behind people’s voting patterns. In the 2020 election, there was a large disparity in voter turnout between white and nonwhite voters. White voter turnout was more than ten percentage points higher than nonwhite voter turnout among eligible people. This disparity is huge and only gets worse with restrictive voting laws like shortened poll hours and strict voter ID laws. I predict that even among college-educated voters, nonwhite voters will likely have lower voter turnout than white voters. My first variable of interest, voter turnout, was measured by asking participants how often they voted in recent elections, confirming it with their voter file. My second main variable of interest, race, was collected through the survey and then confirmed by people’s voter registration files. My other variables of interest, including income and age, were measured in the same fashion. To support my hypothesis, I would observe that nonwhite college-educated voters would be more likely to be in the sporadic or rarely/never voter turnout category than their white college-educated counterparts. To reject my hypothesis, it would be the exact opposite, with nonwhite college-educated voters being more likely to be in the “always” voter category compared to their white college-educated peers.</p>
-<h2 id="project-thoughts">Project thoughts</h2>
+<h2 id="project-thoughts-milestone-1">Project thoughts (Milestone 1)</h2>
 <p>I’m interested in exploring data related to polling during the 2022 midterms and looking at public opinion data. I’d especially like to focus on New York, a reliably blue state, where the Republican Party made significant gains in the House. The Republican Party was able to flip two Long Island House seats, solidifying all four seats on Long Island as Republican. I’d love to look at public opinion polls polling New Yorkers related to issues Republicans campaigned on in the months leading up to the election, in addition to any data available regarding people’s opinions on the candidates running.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
