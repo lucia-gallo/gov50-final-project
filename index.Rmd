@@ -7,7 +7,9 @@ output:
     self_contained: false
 ---
 ## Data Visualization & Discussion (Milestone 4)
+
 From the graph, we can see that people with the lowest amount of education (high school or less) are the people who are likely to fall into the rarely/never voting category. College-educated people are the most likely to fall into the "always" voter category, demonstrating a relationship between education levels and likelihood of voting. The number of people within each category who are sporadic voters remain roughly proportional to the number of people surveyed in the sample population, demonstrating that the percentage of sporadic voters remains relatively stable for each education category. 
+
 ```{r}
 library(forcats)
 library(tidyverse)
