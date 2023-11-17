@@ -11,6 +11,8 @@ From the graph, we can see that people with the lowest amount of education (high
 ```{r}
 library(forcats)
 library(tidyverse)
+nonvoters <- read_csv("nonvoters_data.csv") |>
+  select(educ:voter_category)
 data2 <- nonvoters |>
   mutate(educ = fct_relevel(educ, "High school or less", "Some college", "College")) |>
   ggplot(mapping = aes(y = educ,
