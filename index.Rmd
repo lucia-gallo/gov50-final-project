@@ -6,6 +6,25 @@ output:
   distill::distill_article:
     self_contained: false
 ---
+## Data Visualization & Discussion (Milestone 4)
+From the graph, we can see that people with the lowest amount of education (high school or less) are the people who are likely to fall into the rarely/never voting category. College-educated people are the most likely to fall into the "always" voter category, demonstrating a relationship between education levels and likelihood of voting. The number of people within each category who are sporadic voters remain roughly proportional to the number of people surveyed in the sample population, demonstrating that the percentage of sporadic voters remains relatively stable for each education category. 
+```{r}
+library(forcats)
+library(tidyverse)
+data2 <- nonvoters |>
+  mutate(educ = fct_relevel(educ, "High school or less", "Some college", "College")) |>
+  ggplot(mapping = aes(y = educ,
+                       fill = voter_category)) +
+  geom_bar() +
+  scale_fill_manual(values = c("always" = "green4", 
+                               "rarely/never" = "indianred3", 
+                               "sporadic" = "yellow2")) +
+  labs(y = "Education",
+       x = "Count",
+       fill = "Voter Category")
+data2
+```
+
 ## Data Visualization (Milestone 3)
 ```{r}
 library(tidyverse)
@@ -18,8 +37,6 @@ data1 <- nonvoters |>
               values_from = n)
 knitr::kable(data1)
 ```
-
-
 ## Proposal (Milestone 2)
 
 Is there a relationship among college-educated voters, race, and likelihood to vote? In this study, I plan on using data from FiveThirtyEight to explore the demographics behind people's voting patterns. I plan to focus on college-educated voters and their likelihood of voting based on race. I also might examine other parts of their identities, including age and income. College-educated voters are typically already more likely to be voters compared to non-college-educated citizens, but it would be interesting to examine the other demographics behind people's voting patterns. In the 2020 election, there was a large disparity in voter turnout between white and nonwhite voters. White voter turnout was more than ten percentage points higher than nonwhite voter turnout among eligible people. This disparity is huge and only gets worse with restrictive voting laws like shortened poll hours and strict voter ID laws. I predict that even among college-educated voters, nonwhite voters will likely have lower voter turnout than white voters. My first variable of interest, voter turnout, was measured by asking participants how often they voted in recent elections, confirming it with their voter file. My second main variable of interest, race, was collected through the survey and then confirmed by people's voter registration files. My other variables of interest, including income and age, were measured in the same fashion. To support my hypothesis, I would observe that nonwhite college-educated voters would be more likely to be in the sporadic or rarely/never voter turnout category than their white college-educated counterparts. To reject my hypothesis, it would be the exact opposite, with nonwhite college-educated voters being more likely to be in the "always" voter category compared to their white college-educated peers.
