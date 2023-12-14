@@ -8,14 +8,31 @@ output:
 ---
 ## Introduction
 Is there a relationship among college-educated voters, age, and likelihood to vote? In this study, data is used from FiveThirtyEight to explore the demographics behind people's voting patterns. There is a focus on college-educated voters, their age, and their likelihood of voting. College-educated voters are typically already more likely to be voters compared to non-college-educated citizens, but it would be interesting to examine the other demographics (i.e. age) behind people's voting patterns. In the 2020 election, there was a large disparity in voter turnout between young voters and older voters. I predict that even young, non-college-educated people will be less likely to be regular voters compared to older, college-educated people. To support my hypothesis, I would observe that older college-educated voters would be more likely to be regular voters than their non-college-educated, younger counterparts. To reject my hypothesis, it would be the exact opposite, with younger non-college-educated voters being more likely to be in the "always" voter category compared to their white college-educated peers.
+
 ## Data Section
 This study was cross-sectional because it measured a specific population at a set point in time. FiveThirtyEight sampled 8,327 people, but only 5,836 people are included in the dataset since not everyone could be matched with a corresponding data file. This survey was conducted before the 2020 election, from September 15, 2020 to September 20, 2020. The dataset included other demographics, such as race, gender, and income category. However, it would have been difficult to run a regression on these variables (with the exception of gender). Race would have been difficult to code as a numerical value so as to run a regression, and income was given as categorical ranges in the dataset. No raw data for income for each participant was included in the dataset. 
 
 My first variable of interest, voter turnout, was measured by asking participants how often they voted in recent elections, confirming it with their voter file. There were three tiers within voter turnout: always votes, sporadically votes, and rarely/never votes. Always votes was measured as people who voted in every (or all but one) presidential and midterm elections. Sporadically votes was measured as those who voted in at least two presidential or midterm elections but fewer than all but one election they were eligible to vote in. Lastly, rarely/never votes was measured as those who voted in no elections or only one election. My second main variable of interest, education, was collected through the survey. My other variable of interest, age, was measured through the survey by asking people directly and then confirming it with their voter file.
 
 The data table below shows the proportions of the demographics of people included in the dataset. Within college-educated people, 34.55% of participants were 18-38, 32.92% of people were 39-59, 30% of people were 60-79. 2.53% of college-educated participants were 80 or above. For people with an education of high school or less, 21.6% were ages 18-38, 35.24% were 39-59, 38.31% were 60-79, and 4.84% were over 80. For participants who attended some college, 26.37% were 18-38, 34.27% were 39-59, 35.91% were 60-79, and 3.45% were 80 or above. Younger and middle-aged participants sampled tended to be more educated, with a plurality of them having a college education. Older people often attended some college or only had an education of high school or less. However, this also reflects a shift toward prioritizing college education in younger generations, with this breakdown being fairly representative of the respective average American demographics by age.
+
 ```{r}
 library(tidyverse)
+nonvoters <- read_csv("nonvoters_data.csv") |>
+  select(ppage:voter_category)
+
+## Creating new categorical variables for age and binary variables for voter categories
+nonvoters <- nonvoters |>
+  mutate(Age = case_when(
+    (ppage >= 18 & ppage <= 38) ~ "18-38",
+    (ppage > 38 & ppage <= 59) ~ "39-59",
+    (ppage > 59 & ppage <= 79) ~ "60-79",
+    ppage >= 80 ~ "80 or above"
+  ),
+  regular_voter = if_else(voter_category == "always", 
+                          "Always Votes", "Doesn't Always Vote")
+  )
+## Creating a Table to show Demographics Breakdown
 data1 <- nonvoters |>
   group_by(educ, Age) |>
   summarize(n = n()) |>
@@ -35,24 +52,10 @@ In my second graph, I explore the relationship between people's age and their li
 To run the regression, I needed to create a binary variable for the voter category. To do this, I categorized people who sporadically vote or who rarely/never vote into one category of people who don't always vote. The other category solely consisted of people who always voted. After running the regression, I found that the average college-educated person  who always votes is 54.54 years old (the intercept). This value is statistically significant because there is a p-value of less than 0.001 (which is less than alpha = 0.05), and we can determine a causal relationship between education, always voting, and age. College-educated people who always vote are, on average, older. The average college-educated voter who doesn't always vote is 54.54 - 8.015, 46.525 years old. This value is statistically significant because there is a p-value of less than 0.001 (which is less than alpha = 0.05). Compared to people of the same educational background who always vote, college educated people who don't always vote are, on average, eight years younger. The average person who always voted but had an education of high school or less was 54.54 + 8.21, 62.75 years old. This value is statistically significant because there is a p-value of less than 0.001 (which is less than alpha = 0.05). People with a lesser education background but always voted were more likely to be older compared to those who always voted but had backgrounds in higher education. The average person who always voted and attended some college is 54.54 + 0.904, 55.444 years old. However, this is not statistically significant as the p-value is 0.315 (which is greater than alpha = 0.05). The average person who didn't always vote and has a high school education or less was 54.54 - 2.93, 51.61 years old. This value is statistically significant because there is a p-value of 0.012 (which is less than alpha = 0.05). Lastly, the average person who didn't always vote and has some college education was 54.54 + 2.988, 57.528 years old. This value is statistically significant because there is a p-value of 0.007 (which is less than alpha = 0.05). 
 
 Overall, people who did not regularly vote, regardless of education, tended to be younger. However, there is one exception. The average person who didn't always vote and had some college education was older, at 57.528 years old. People who always voted, regardless of educational background, tended to be older. The average regular voter who had an educational background of high school or less was 62.75 years old and the average regular voter who attended some college was 55.444 years old. People who didn't always vote tended to skew younger, with the average college-educated person who did not always vote being 46.525 years old and the average person with a background of high school or less who did not always vote being 51.61 years old. 
+
 ```{r}
 library(forcats)
 library(tidyverse)
-
-## Creating new categorical variables for age and binary variables for voter categories
-nonvoters <- read_csv("nonvoters_data.csv") |>
-  select(ppage:voter_category)
-nonvoters <- nonvoters |>
-  mutate(Age = case_when(
-    (ppage >= 18 & ppage <= 38) ~ "18-38",
-    (ppage > 38 & ppage <= 59) ~ "39-59",
-    (ppage > 59 & ppage <= 79) ~ "60-79",
-    ppage >= 80 ~ "80 or above"
-  ),
-  regular_voter = if_else(voter_category == "always", 
-                          "Always Votes", "Doesn't Always Vote")
-  )
-
 ## Education Graph
 data2 <- nonvoters |>
   mutate(educ = fct_relevel(educ, "High school or less", "Some college", "College")) |>
@@ -89,6 +92,5 @@ modelsummary::modelsummary(regression,
                                          "p = {p.value}"),
                            gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
-
 ## Conclusion
 Overall, people who weren't regular voters tended to be younger than those who were regular voters. Additionally, people who attended some college or graduated college were more likely to be regular voters compared to those with an educational background of high school or less. However, it was difficult to determine the direct relationship between education and voter regularity because the regression was calculating for age. The graph demonstrating the relationship between education and voter category, however, was effective at showing how higher education can make a person more likely to regularly vote. Some confounding variables could have been factors like income and race. For instance, people with lower incomes might not vote as regularly because they have to work. Additionally, barriers to voting often hinder people of color from voting as easily as white people. If more time was given, a regression could be run taking into account the confounding of income and race. The raw income data would have been really helpful to run the regression. 

@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","non-voters/nonvoters_codebook.pdf","non-voters/README.md","nonvoters_data.csv"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","non-voters/nonvoters_codebook.pdf","non-voters/README.md","nonvoters_data.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1473,6 +1473,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="index_files/header-attrs-2.24/header-attrs.js"></script>
+  <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1517,14 +1519,88 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="data-visualization-discussion-milestone-4">Data Visualization &amp; Discussion (Milestone 4)</h2>
-<p>From the graph, we can see that people with the lowest amount of education (high school or less) are the people who are likely to fall into the rarely/never voting category. College-educated people are the most likely to fall into the “always” voter category, demonstrating a relationship between education levels and likelihood of voting. The number of people within each category who are sporadic voters remain roughly proportional to the number of people surveyed in the sample population, demonstrating that the percentage of sporadic voters remains relatively stable for each education category.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Is there a relationship among college-educated voters, age, and likelihood to vote? In this study, data is used from FiveThirtyEight to explore the demographics behind people’s voting patterns. There is a focus on college-educated voters, their age, and their likelihood of voting. College-educated voters are typically already more likely to be voters compared to non-college-educated citizens, but it would be interesting to examine the other demographics (i.e. age) behind people’s voting patterns. In the 2020 election, there was a large disparity in voter turnout between young voters and older voters. I predict that even young, non-college-educated people will be less likely to be regular voters compared to older, college-educated people. To support my hypothesis, I would observe that older college-educated voters would be more likely to be regular voters than their non-college-educated, younger counterparts. To reject my hypothesis, it would be the exact opposite, with younger non-college-educated voters being more likely to be in the “always” voter category compared to their white college-educated peers.</p>
+<h2 id="data-section">Data Section</h2>
+<p>This study was cross-sectional because it measured a specific population at a set point in time. FiveThirtyEight sampled 8,327 people, but only 5,836 people are included in the dataset since not everyone could be matched with a corresponding data file. This survey was conducted before the 2020 election, from September 15, 2020 to September 20, 2020. The dataset included other demographics, such as race, gender, and income category. However, it would have been difficult to run a regression on these variables (with the exception of gender). Race would have been difficult to code as a numerical value so as to run a regression, and income was given as categorical ranges in the dataset. No raw data for income for each participant was included in the dataset.</p>
+<p>My first variable of interest, voter turnout, was measured by asking participants how often they voted in recent elections, confirming it with their voter file. There were three tiers within voter turnout: always votes, sporadically votes, and rarely/never votes. Always votes was measured as people who voted in every (or all but one) presidential and midterm elections. Sporadically votes was measured as those who voted in at least two presidential or midterm elections but fewer than all but one election they were eligible to vote in. Lastly, rarely/never votes was measured as those who voted in no elections or only one election. My second main variable of interest, education, was collected through the survey. My other variable of interest, age, was measured through the survey by asking people directly and then confirming it with their voter file.</p>
+<p>The data table below shows the proportions of the demographics of people included in the dataset. Within college-educated people, 34.55% of participants were 18-38, 32.92% of people were 39-59, 30% of people were 60-79. 2.53% of college-educated participants were 80 or above. For people with an education of high school or less, 21.6% were ages 18-38, 35.24% were 39-59, 38.31% were 60-79, and 4.84% were over 80. For participants who attended some college, 26.37% were 18-38, 34.27% were 39-59, 35.91% were 60-79, and 3.45% were 80 or above. Younger and middle-aged participants sampled tended to be more educated, with a plurality of them having a college education. Older people often attended some college or only had an education of high school or less. However, this also reflects a shift toward prioritizing college education in younger generations, with this breakdown being fairly representative of the respective average American demographics by age.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='va'>nonvoters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"nonvoters_data.csv"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>ppage</span><span class='op'>:</span><span class='va'>voter_category</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>## Creating new categorical variables for age and binary variables for voter categories</span></span>
+<span><span class='va'>nonvoters</span> <span class='op'>&lt;-</span> <span class='va'>nonvoters</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Age <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='op'>(</span><span class='va'>ppage</span> <span class='op'>&gt;=</span> <span class='fl'>18</span> <span class='op'>&amp;</span> <span class='va'>ppage</span> <span class='op'>&lt;=</span> <span class='fl'>38</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"18-38"</span>,</span>
+<span>    <span class='op'>(</span><span class='va'>ppage</span> <span class='op'>&gt;</span> <span class='fl'>38</span> <span class='op'>&amp;</span> <span class='va'>ppage</span> <span class='op'>&lt;=</span> <span class='fl'>59</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"39-59"</span>,</span>
+<span>    <span class='op'>(</span><span class='va'>ppage</span> <span class='op'>&gt;</span> <span class='fl'>59</span> <span class='op'>&amp;</span> <span class='va'>ppage</span> <span class='op'>&lt;=</span> <span class='fl'>79</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"60-79"</span>,</span>
+<span>    <span class='va'>ppage</span> <span class='op'>&gt;=</span> <span class='fl'>80</span> <span class='op'>~</span> <span class='st'>"80 or above"</span></span>
+<span>  <span class='op'>)</span>,</span>
+<span>  regular_voter <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>voter_category</span> <span class='op'>==</span> <span class='st'>"always"</span>, </span>
+<span>                          <span class='st'>"Always Votes"</span>, <span class='st'>"Doesn't Always Vote"</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='co'>## Creating a Table to show Demographics Breakdown</span></span>
+<span><span class='va'>data1</span> <span class='op'>&lt;-</span> <span class='va'>nonvoters</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>educ</span>, <span class='va'>Age</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>prop <span class='op'>=</span> <span class='va'>n</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span></span>
+<span>    id_cols <span class='op'>=</span> <span class='va'>Age</span>,</span>
+<span>    names_from <span class='op'>=</span> <span class='va'>educ</span>,</span>
+<span>    values_from <span class='op'>=</span> <span class='va'>prop</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>data1</span>, digits <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Age</th>
+<th style="text-align: right;">College</th>
+<th style="text-align: right;">High school or less</th>
+<th style="text-align: right;">Some college</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">18-38</td>
+<td style="text-align: right;">0.3455</td>
+<td style="text-align: right;">0.2160</td>
+<td style="text-align: right;">0.2637</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">39-59</td>
+<td style="text-align: right;">0.3292</td>
+<td style="text-align: right;">0.3524</td>
+<td style="text-align: right;">0.3427</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">60-79</td>
+<td style="text-align: right;">0.3000</td>
+<td style="text-align: right;">0.3831</td>
+<td style="text-align: right;">0.3591</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">80 or above</td>
+<td style="text-align: right;">0.0253</td>
+<td style="text-align: right;">0.0484</td>
+<td style="text-align: right;">0.0345</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="results">Results</h2>
+<p>In this project, I analyzed two variables of interest–education and age. In my first graph, I explore the relationship between people’s education levels and their likeliness to vote. To do this, I created a graph demonstrating the number of people within each education group and color coding the number of people within each educational category that fell under each level of voting. This survey included three levels of voter categories: always, sporadically, and rarely/never. Always was green, sporadically was yellow, and rarely/never was red. The graph makes it easy to see the proportions of voter types within each education category. Within each level of education, sporadic voters made up the highest percentage of voter category. People who graduated from college had the lowest proportion of rarely/never voters, while people with an education of high school or less had the highest proportion of rarely/never voters. People with an education of high school or less had the lowest proportion of people who always vote.</p>
+<p>In my second graph, I explore the relationship between people’s age and their likeliness to vote. To do this, I created a graph demonstrating the number of people within each range and color coding the number of people wihtin each range that fell under each level of voting. People aged 18-38 had the highest proportion of never/rarely voters, while older people aged 60 and above had the smallest proportion. More than half of voters above 80 were categorized as people who always voted, while less than half of voters in every other age demographic were categorized as people who always voted. A majority of voters aged 39-59 were sporadic voters while there were about as many sporadic voters as always voters in the 60-79 age group.</p>
+<p>To run the regression, I needed to create a binary variable for the voter category. To do this, I categorized people who sporadically vote or who rarely/never vote into one category of people who don’t always vote. The other category solely consisted of people who always voted. After running the regression, I found that the average college-educated person who always votes is 54.54 years old (the intercept). This value is statistically significant because there is a p-value of less than 0.001 (which is less than alpha = 0.05), and we can determine a causal relationship between education, always voting, and age. College-educated people who always vote are, on average, older. The average college-educated voter who doesn’t always vote is 54.54 - 8.015, 46.525 years old. This value is statistically significant because there is a p-value of less than 0.001 (which is less than alpha = 0.05). Compared to people of the same educational background who always vote, college educated people who don’t always vote are, on average, eight years younger. The average person who always voted but had an education of high school or less was 54.54 + 8.21, 62.75 years old. This value is statistically significant because there is a p-value of less than 0.001 (which is less than alpha = 0.05). People with a lesser education background but always voted were more likely to be older compared to those who always voted but had backgrounds in higher education. The average person who always voted and attended some college is 54.54 + 0.904, 55.444 years old. However, this is not statistically significant as the p-value is 0.315 (which is greater than alpha = 0.05). The average person who didn’t always vote and has a high school education or less was 54.54 - 2.93, 51.61 years old. This value is statistically significant because there is a p-value of 0.012 (which is less than alpha = 0.05). Lastly, the average person who didn’t always vote and has some college education was 54.54 + 2.988, 57.528 years old. This value is statistically significant because there is a p-value of 0.007 (which is less than alpha = 0.05).</p>
+<p>Overall, people who did not regularly vote, regardless of education, tended to be younger. However, there is one exception. The average person who didn’t always vote and had some college education was older, at 57.528 years old. People who always voted, regardless of educational background, tended to be older. The average regular voter who had an educational background of high school or less was 62.75 years old and the average regular voter who attended some college was 55.444 years old. People who didn’t always vote tended to skew younger, with the average college-educated person who did not always vote being 46.525 years old and the average person with a background of high school or less who did not always vote being 51.61 years old.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://forcats.tidyverse.org/'>forcats</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='va'>nonvoters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"nonvoters_data.csv"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>educ</span><span class='op'>:</span><span class='va'>voter_category</span><span class='op'>)</span></span>
+<span><span class='co'>## Education Graph</span></span>
 <span><span class='va'>data2</span> <span class='op'>&lt;-</span> <span class='va'>nonvoters</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>educ <span class='op'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/fct_relevel.html'>fct_relevel</a></span><span class='op'>(</span><span class='va'>educ</span>, <span class='st'>"High school or less"</span>, <span class='st'>"Some college"</span>, <span class='st'>"College"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>educ</span>,</span>
@@ -1535,59 +1611,208 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>                               <span class='st'>"sporadic"</span> <span class='op'>=</span> <span class='st'>"yellow2"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='st'>"Education"</span>,</span>
 <span>       x <span class='op'>=</span> <span class='st'>"Count"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"The Relationship Between Education and Voter Participation"</span>,</span>
 <span>       fill <span class='op'>=</span> <span class='st'>"Voter Category"</span><span class='op'>)</span></span>
 <span><span class='va'>data2</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+<img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Age Graph</span></span>
+<span><span class='va'>data3</span> <span class='op'>&lt;-</span> <span class='va'>nonvoters</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>Age</span>,</span>
+<span>                       fill <span class='op'>=</span> <span class='va'>voter_category</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"always"</span> <span class='op'>=</span> <span class='st'>"green4"</span>, </span>
+<span>                               <span class='st'>"rarely/never"</span> <span class='op'>=</span> <span class='st'>"indianred3"</span>, </span>
+<span>                               <span class='st'>"sporadic"</span> <span class='op'>=</span> <span class='st'>"yellow2"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='st'>"Age"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Count"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"The Relationship Between Age and Voter Participation"</span>,</span>
+<span>       fill <span class='op'>=</span> <span class='st'>"Voter Category"</span><span class='op'>)</span></span>
+<span><span class='va'>data3</span></span></code></pre>
 </div>
-<h2 id="data-visualization-milestone-3">Data Visualization (Milestone 3)</h2>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-2.png" width="624" /></p>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='va'>nonvoters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"nonvoters_data.csv"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>educ</span><span class='op'>:</span><span class='va'>voter_category</span><span class='op'>)</span></span>
-<span><span class='va'>data1</span> <span class='op'>&lt;-</span> <span class='va'>nonvoters</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>educ</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>voter_category</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>voter_category</span>,</span>
-<span>              values_from <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>data1</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>regression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>ppage</span> <span class='op'>~</span> <span class='va'>regular_voter</span> <span class='op'>*</span> <span class='va'>educ</span>, data <span class='op'>=</span> <span class='va'>nonvoters</span><span class='op'>)</span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>regression</span>,</span>
+<span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
-<table>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th style="text-align: left;">educ</th>
-<th style="text-align: right;">always</th>
-<th style="text-align: right;">rarely/never</th>
-<th style="text-align: right;">sporadic</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+ (1)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">College</td>
-<td style="text-align: right;">834</td>
-<td style="text-align: right;">423</td>
-<td style="text-align: right;">1073</td>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+54.540
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">High school or less</td>
-<td style="text-align: right;">411</td>
-<td style="text-align: right;">631</td>
-<td style="text-align: right;">754</td>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.573
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Some college</td>
-<td style="text-align: right;">566</td>
-<td style="text-align: right;">397</td>
-<td style="text-align: right;">747</td>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+regular_voterDoesn’t Always Vote
+</td>
+<td style="text-align:center;">
+−8.015
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.715
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+educHigh school or less
+</td>
+<td style="text-align:center;">
+8.210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.996
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+educSome college
+</td>
+<td style="text-align:center;">
+0.904
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.900
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.315
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+regular_voterDoesn’t Always Vote × educHigh school or less
+</td>
+<td style="text-align:center;">
+−2.930
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 1.172
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.012
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+regular_voterDoesn’t Always Vote × educSome college
+</td>
+<td style="text-align:center;">
+2.988
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 1.110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1.5px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1.5px">
+p = 0.007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+5836
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.063
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.062
+</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="proposal-milestone-2">Proposal (Milestone 2)</h2>
-<p>Is there a relationship among college-educated voters, race, and likelihood to vote? In this study, I plan on using data from FiveThirtyEight to explore the demographics behind people’s voting patterns. I plan to focus on college-educated voters and their likelihood of voting based on race. I also might examine other parts of their identities, including age and income. College-educated voters are typically already more likely to be voters compared to non-college-educated citizens, but it would be interesting to examine the other demographics behind people’s voting patterns. In the 2020 election, there was a large disparity in voter turnout between white and nonwhite voters. White voter turnout was more than ten percentage points higher than nonwhite voter turnout among eligible people. This disparity is huge and only gets worse with restrictive voting laws like shortened poll hours and strict voter ID laws. I predict that even among college-educated voters, nonwhite voters will likely have lower voter turnout than white voters. My first variable of interest, voter turnout, was measured by asking participants how often they voted in recent elections, confirming it with their voter file. My second main variable of interest, race, was collected through the survey and then confirmed by people’s voter registration files. My other variables of interest, including income and age, were measured in the same fashion. To support my hypothesis, I would observe that nonwhite college-educated voters would be more likely to be in the sporadic or rarely/never voter turnout category than their white college-educated counterparts. To reject my hypothesis, it would be the exact opposite, with nonwhite college-educated voters being more likely to be in the “always” voter category compared to their white college-educated peers.</p>
-<h2 id="project-thoughts-milestone-1">Project thoughts (Milestone 1)</h2>
-<p>I’m interested in exploring data related to polling during the 2022 midterms and looking at public opinion data. I’d especially like to focus on New York, a reliably blue state, where the Republican Party made significant gains in the House. The Republican Party was able to flip two Long Island House seats, solidifying all four seats on Long Island as Republican. I’d love to look at public opinion polls polling New Yorkers related to issues Republicans campaigned on in the months leading up to the election, in addition to any data available regarding people’s opinions on the candidates running.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Overall, people who weren’t regular voters tended to be younger than those who were regular voters. Additionally, people who attended some college or graduated college were more likely to be regular voters compared to those with an educational background of high school or less. However, it was difficult to determine the direct relationship between education and voter regularity because the regression was calculating for age. The graph demonstrating the relationship between education and voter category, however, was effective at showing how higher education can make a person more likely to regularly vote. Some confounding variables could have been factors like income and race. For instance, people with lower incomes might not vote as regularly because they have to work. Additionally, barriers to voting often hinder people of color from voting as easily as white people. If more time was given, a regression could be run taking into account the confounding of income and race. The raw income data would have been really helpful to run the regression.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
